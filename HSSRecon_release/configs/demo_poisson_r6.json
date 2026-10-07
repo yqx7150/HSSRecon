@@ -1,0 +1,64 @@
+{
+  "release": "hssrecon-demo-0.1.0",
+  "method": "HSSRecon",
+  "implementation": "HSSRecon",
+  "protocol": "hssrecon-demo-v1",
+  "version": "HSSRecon-v1.0",
+  "dataset": "fastMRI-brain",
+  "sampling": {
+    "kind": "poisson",
+    "requested_acceleration": 6,
+    "mask_structure": "point",
+    "note": "The current mask raster is a point-support Poisson mask; physical groups are formed before Hankel lifting."
+  },
+  "self_supervision": {
+    "slice_specific": true,
+    "physical_group_split_before_lifting": true,
+    "duplicate_multiplicity_correction": true,
+    "target_fraction": 0.25,
+    "reference_free_training": true,
+    "reference_free_selection": true,
+    "validation_input_mode": "deployment_consistent",
+    "validation_fold_count": 2,
+    "validation_aggregation": "max",
+    "validation_fraction": 0.20,
+    "validation_interval": 25,
+    "patience": 6
+  },
+  "hankel": {
+    "geometry": "full_2d",
+    "kernel_size": [3, 3],
+    "operator_mode": "two_component_weighted_psd",
+    "filter_rank": 16,
+    "sampling_detail_rank": 8,
+    "sampling_detail_weight": 0.1
+  },
+  "solver": {
+    "mode": "fixed_cg",
+    "training_steps": 8,
+    "inference_steps": 24,
+    "lambda": 1.0,
+    "ridge": 0.001,
+    "acquired_hard_data_consistency": true
+  },
+  "initialization": {
+    "mode": "zero_fill"
+  },
+  "baselines": {
+    "sake": {
+      "enabled_for_comparison": true,
+      "kernel_size": [6, 6],
+      "iterations": 100,
+      "rank_factor": 1.5
+    }
+  },
+  "randomness": {
+    "optimization_seed": 83,
+    "mask_split_seed": 89
+  },
+  "evaluation": {
+    "primary_metrics": ["center-ROI PSNR", "center-ROI SSIM"],
+    "reference_policy": "read only after output/checkpoint lock",
+    "selection_note": "The two bundled slices are fixed qualitative examples; they are not a population-level estimate."
+  }
+}

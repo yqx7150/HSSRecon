@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hssrecon-release"
+version = "0.1.0"
+description = "HSSRecon fastMRI Poisson demonstration release"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+demo = [
+  "matplotlib>=3.7",
+  "scipy>=1.10",
+  "scikit-image>=0.20",
+]
+reconstruction = [
+  "torch>=2.1",
+  "scipy>=1.10",
+  "scikit-image>=0.20",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,41 @@
+{
+  "release": "hssrecon-demo-0.1.0",
+  "purpose": "Two fixed Poisson R6 fastMRI-brain slices for a compact visual demonstration.",
+  "data_scope": "Derived RSS images and mask only; no raw multi-coil k-space is redistributed here.",
+  "method_version": "HSSRecon-v1.0",
+  "reconstruction_initialization": "zero_fill; SAKE is comparison-only",
+  "visual_bundle_note": "The compact arrays are frozen visual snapshots for the two fixed examples. They are rendered by render_poisson_demo.py and are not raw multi-coil inputs for the reconstruction runner.",
+  "reconstruction_entrypoint_note": "The reconstruction runner requires an external carrier NPZ containing kspace and mask; raw multi-coil fastMRI carriers are not redistributed in this compact demo.",
+  "metric_scope": "center-square ROI; primary SSIM is the foreground ROI SSIM from the release metric implementation",
+  "selection_policy": "Two fixed slice-008 examples for representative qualitative display; descriptive only, not a population-level estimate.",
+  "cases": [
+    {
+      "file": "file_brain_AXFLAIR_200_6002467_slice008_poisson_R6.npz",
+      "sha256": "02eb3804e97fa1b25a639d28c1c2d5ef60c2f1f14b9e2660e472dac6501975d7",
+      "sequence": "AXFLAIR",
+      "subject": "6002467",
+      "slice": 8,
+      "sampling_kind": "poisson",
+      "requested_acceleration": 6,
+      "metrics": {
+        "ZF": {"psnr": 26.4277243689338, "ssim": 0.7331110835075378, "nmse": 0.019906278250611423},
+        "SAKE": {"psnr": 27.92435023578485, "ssim": 0.7275164127349854, "nmse": 0.014103518861231077},
+        "HSSRecon": {"psnr": 30.570715772477396, "ssim": 0.8070749044418335, "nmse": 0.0076681558318359485}
+      }
+    },
+    {
+      "file": "file_brain_AXT2_210_6001737_slice008_poisson_R6.npz",
+      "sha256": "7283ee115b50100d4bbcaae83cbf4e54a48bd1c466be2541673c7f014d3e401c",
+      "sequence": "AXT2",
+      "subject": "6001737",
+      "slice": 8,
+      "sampling_kind": "poisson",
+      "requested_acceleration": 6,
+      "metrics": {
+        "ZF": {"psnr": 27.997443696203668, "ssim": 0.8339727520942688, "nmse": 0.028838972998338673},
+        "SAKE": {"psnr": 36.71175492817053, "ssim": 0.9608402252197266, "nmse": 0.0038774719717835347},
+        "HSSRecon": {"psnr": 37.65397202868634, "ssim": 0.9644896984100342, "nmse": 0.003121238513836075}
+      }
+    }
+  ]
+}

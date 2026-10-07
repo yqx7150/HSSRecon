@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.DS_Store
+
+# Reconstruction outputs and checkpoints can be large.
+outputs/**
+!outputs/.gitkeep
+demo/outputs/*
+!demo/outputs/.gitkeep
